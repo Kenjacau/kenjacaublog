@@ -1,0 +1,133 @@
+<div class="content-wrapper">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://kenjacau.me/">Kenjacau</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="home"><a href="index.html">Home</a></li>
+                <li class="about"><a href="./views/about.html">About Me</a></li>
+                <li class="projects"><a href="./views/project.html">Projects</a></li>
+                <li class="active blog"><a href="./views/blog.html">Blog</a></li>
+                <li class="resume"><a href="./views/resume.html">Resume</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./create.erb"><span class="glyphicon glyphicon-user"></span>Contact Me</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+
+        <div class="container">
+            
+            <div class="row social-block">
+                <div class="col-sm-12">
+                    <div class="socialmedia">
+                        <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/in/kenjacau"><img src="./images/linkedin.png"></a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Kenjacau"><img src="./images/thegithubicon.png"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 jumbotron">
+
+                <h2>Blog</h2>
+
+
+                <div class="row">
+                    <ul>
+            <% @customers.each do |customers| %>
+                <li>
+                    <p>
+                        <a href="<%=customers.email %>">
+                            <%=customers.email %>
+                        </a> from
+                        <%=customers.name %>
+                    </p>
+                    <p>
+                        <%=customers.comment %>
+                    </p>
+                </li>
+                <% end %>
+            </ul>
+                    
+                    
+                    
+                    <form class="form" method="POST" action="/">
+                        <input type='hidden' name='csrfmiddlewaretoken' value='BoZB8lOs2tgI0DUVG58fCSxdS075n0jz' />
+
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input autofocus="autofocus" id="id_name" maxlength="30" name="name" placeholder="Name" type="text" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input id="id_email" name="email" placeholder="E-mail address" type="email" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <textarea class="form-control n" rows="5" placeholder="Message" name="message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <!-- /container -->
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+        <!--REPLACECONTENT-->
+        <ul>
+            <% @customers.each do |customers| %>
+                <li>
+                    <p>
+                        <a href="<%= customers.email %>">
+                            <%=customers.email %>
+                        </a> from
+                        <%=c ustomers.name %>
+                    </p>
+                    <p>
+                        <%=customers.comment %>
+                    </p>
+                </li>
+                <% end %>
+        </ul>
+
+        <p><a href="/create">Join the List</a></p>
+
+    </div>
+
+</div>
+</div>
