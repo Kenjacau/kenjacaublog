@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20160325180130) do
   enable_extension "plpgsql"
 
   create_table "blogposts", force: :cascade do |t|
-    t.text   "title"
-    t.text   "content"
+    t.string "title"
+    t.string "content"
     t.string "filesrc"
     t.string "hreflink"
   end
@@ -27,12 +27,6 @@ ActiveRecord::Schema.define(version: 20160325180130) do
     t.string  "user",         default: "anon"
     t.text    "comment"
     t.integer "blogposts_id"
-  end
-
-  create_table "customers", force: :cascade do |t|
-    t.string "email"
-    t.string "name"
-    t.text   "comment"
   end
 
 end

@@ -2,7 +2,7 @@ require 'sinatra'
 require 'uri'
 require 'active_record'
 
-db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///mycustomers')
+db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///blogbase')
 
 set :public_folder, "public"
 
@@ -15,23 +15,28 @@ ActiveRecord::Base.establish_connection(
   :encoding => 'utf8'
 )
 
-class Customers < ActiveRecord::Base
+class Blogpost < ActiveRecord::Base
+  has_many :comment
+end
+
+class Comment < ActiveRecord::Base
+  belongs_to :blogpost
 end
 
 get '/' do
   #Latest post gets to the top
-  @customers = Customers.order("id DESC")
-  erb :index
+  @blogposts = Blogpost.order("id DESC")
+  erb :blog
 end
 
-get '/create' do
+get '/createcomment' do
   erb :create
 end
 
 
-post '/create' do
-  customers = Customers.new(params[:customers])
-  if customers.save
+post '/createcomment' do
+  customer = Comment.new(params[:comment])
+  if customer.save
     redirect to "/"
   else
     return "failure!"
