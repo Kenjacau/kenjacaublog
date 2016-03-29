@@ -21,10 +21,10 @@
                     <div class="socialmedia">
                         <ul>
                             <li>
-                                <a href="https://www.linkedin.com/in/kenjacau"><img src="linkedin.png"></a>
+                                <a href="https://www.linkedin.com/in/kenjacau"><img src="/images/linkedin.png"></a>
                             </li>
                             <li>
-                                <a href="https://github.com/Kenjacau"><img src="thegithubicon.png"></a>
+                                <a href="https://github.com/Kenjacau"><img src="/images/thegithubicon.png"></a>
                             </li>
                         </ul>
                     </div>
@@ -36,6 +36,7 @@
                     
                     
             <% @blogposts.each do |blogpost| %>
+          
                     <div class="row">
                         <div class="row">
                             <h3> <%=blogpost.title %> </h3>
@@ -49,18 +50,66 @@
                             </div>
                         </div>
                         <div class="row">
-                            <nav class="navbar navbar-inverse">
+                           <nav class="navbar navbar-inverse">
                                 <div class="container-fluid">
                                     <ul class="nav navbar-nav">
-                                        <li class="comments"><a href="index.html"><%=blogpost.comments.size%></a></li>
-                                        <li class="link"><a href="<%=blogpost.hreflink%>">Link</a></li>
+                                       <li><a class="btn btn-inverse" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><%=commentcount(blogpost.id)%> Comments</a></li>
+                                       <li class="link"><a href="<%=blogpost.hreflink%>">Link</a></li>
+                                       
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="./create.erb"><span></span>Read More</a></li>
+                                        <li><a href="./readmore/<%=blogpost.id%>"><span></span>Read More</a></li>
                                     </ul>
                                 </div>
+                            </div>
+                            
+                        
                             </nav>
-                        </div>
+<div class="row">
+                                <div class="collapse container" id="collapseExample">
+                                          <div class="card card-block">
+                                            <div class="row">
+          <form class="form" method="POST" action="/">
+            <input type='hidden' name='csrfmiddlewaretoken' value='BoZB8lOs2tgI0DUVG58fCSxdS075n0jz' />
+
+
+          <div class="row">
+            <div class="form-group">
+              <div class="col-md-3">
+                <input autofocus="autofocus" id="id_name" maxlength="30" name="name" placeholder="Name" type="text" />
+              </div>
+            </div>
+          </div>
+          
+           <div class="row">
+            <div class="form-group">
+              <div class="col-md-3">
+                <input id="id_email" name="email" placeholder="E-mail address" type="email" />
+              </div>
+            </div>
+          </div>
+          
+           <div class="row">
+            <div class="form-group">
+              <div class="col-md-3">
+                <textarea class="form-control n" rows="5" placeholder="Message" name="message"></textarea>
+              </div>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+              </div>
+            </div>
+            
+
+          </form>
+        </div>
+                                          </div>
+                                        </div>
+                                </div>
+                                                               
                     </div>
                      <% end %>
                     

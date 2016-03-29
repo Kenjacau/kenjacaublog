@@ -5,9 +5,20 @@ blog_post =
   "https://cloud.githubusercontent.com/assets/12632927/13461330/b81a9c0c-e04e-11e5-91e3-7a511c053e77.png",
   "https://cloud.githubusercontent.com/assets/12632927/13461330/b81a9c0c-e04e-11e5-91e3-7a511c053e77.png"],
   [ "New MOBA game", "Cool new 3rd person MOBA game is coming out soon. Looks interesting. It's called Paragon by Epic Games.",
-  "https://www.epicgames.com/paragon/","https://cloud.githubusercontent.com/assets/12632927/13376680/4a12c6dc-dd90-11e5-85b2-179d652cdcab.png" ]
+  "https://cloud.githubusercontent.com/assets/12632927/13376680/4a12c6dc-dd90-11e5-85b2-179d652cdcab.png", "https://www.epicgames.com/paragon/"]
 ]
 
 blog_post.each do |title, content, filesrc, hreflink|
   Blogpost.create( title: title, content: content,filesrc: filesrc,hreflink: hreflink )
+end
+
+comments = 
+[
+  ["anon", "hello world",1],
+ ["anon2", "hello world2",1],
+ ["anon3", "hello world3",1],
+]
+
+comments.each do |user, comment, blogposts_id|
+  Comment.create(user: user, comment: comment,blogposts_id: blogposts_id )
 end

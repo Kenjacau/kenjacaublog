@@ -16,16 +16,33 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Blogpost < ActiveRecord::Base
-  has_many :comment
+  has_many :comments
 end
 
 class Comment < ActiveRecord::Base
-  belongs_to :blogpost
+  belongs_to :blogpost, :counter_cache => true 
 end
 
 get '/' do
+  erb :home
+end
+
+get '/resume' do
+  redirect '/static/resume.html' 
+end
+
+get '/blog' do
   #Latest post gets to the top
   @blogposts = Blogpost.order("id DESC")
+  @comments = Comment.where(blogposts_id: params[:id])
+  erb :blog
+end
+
+
+get '/comments/:id' do
+  #Latest post gets to the top
+
+  @comments = Comment.where(comments_id: params[:id])
   erb :blog
 end
 
@@ -41,4 +58,14 @@ post '/createcomment' do
   else
     return "failure!"
   end
+end
+
+get '/readmore/:id' do
+@blogreadmore = Blogpost.where(blogposts_id: params[:id])
+
+erb :readmore
+end
+
+def commentcount(blogpostid)
+  return Comment.where(blogposts_id: blogpostid).size
 end

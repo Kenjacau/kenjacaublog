@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header"> <a class="navbar-brand" href="http://kenjacau.me/">Kenjacau</a> </div>
+            <ul class="nav navbar-nav">
+                <li class="home"><a href="home.erb">Home</a></li>
+                <li class="about"><a href="./views/about.erb">About Me</a></li>
+                <li class="projects"><a href="./views/project.erb">Projects</a></li>
+                <li class="blog active"><a href="./views/blog.erb">Blog</a></li>
+                <li class="resume"><a href="./views/resume.erb">Resume</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./create.erb"><span class="glyphicon glyphicon-user"></span>Contact Me</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="container">
+            <div class="row social-block">
+                <div class="col-sm-12">
+                    <div class="socialmedia">
+                        <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/in/kenjacau"><img src="/images/linkedin.png"></a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Kenjacau"><img src="/images/thegithubicon.png"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 jumbotron">
+                <h2 class="text-center"><%=@blogreadmore.title%></h2>
+                <div class="row blog">
+                    
+          
+                    <div class="row">
+                        <div class="row">
+                            <h3> <%=@blogreadmore.title %> </h3>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-3"> <img src="<%=@blogreadmore.filesrc %>" class="img-thumbnail" width="304" height="236"></img>
+                            </div>
+                            <div class="col-sm-9">
+                                <p><%=@blogreadmore.content %></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <nav class="navbar navbar-inverse">
+                                <div class="container-fluid">
+                                    <ul class="nav navbar-nav">
+                                        <li class="comments">
+                                          
+                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample"aria-expanded="false" aria-controls="collapseExample"><%=commentcount(blogpost.id)%> Comments</a></li>
+                                        <li class="link"><a href="<%=blogpost.hreflink%>">Link</a></li>
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="./blog.erb"><span></span>Back</a></li>
+                                    </ul>
+                                    
+<div class="collapse" id="collapseExample">
+  <div class="card card-block">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
