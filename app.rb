@@ -27,8 +27,21 @@ get '/' do
   erb :home
 end
 
-get '/resume' do
+get '/kenjacau' do
+  redirect 'http://kenjacau.me/' 
+end
+
+get '*/resume' do
   redirect '/static/resume.html' 
+end
+get '*/project' do
+  erb :project
+end
+get '*/about' do
+  erb :about
+end
+get '*/contact' do
+  erb :contact
 end
 
 get '*/blog' do
@@ -56,6 +69,12 @@ post '*/createcomment' do
 end
 
 get '/readmore/:id' do
+@blogreadmore = Blogpost.find_by_id(params[:id])
+
+erb :readmore
+end
+
+get '/admin' do
 @blogreadmore = Blogpost.find_by_id(params[:id])
 
 erb :readmore

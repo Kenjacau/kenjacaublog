@@ -118,21 +118,22 @@ li {
     margin-bottom: 50px;
 }
 
-#homecon {
-    text-align: center;
-    width: 600px;
-    padding-bottom: 50px;
+.footer, .push {
+    height: 200px; /* .push must be the same height as .footer */
 }
 
 #homecon h1 {
     font-size: 3.9em;
+    padding-top: 200px;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
-    letter-spacing: .3em
+    letter-spacing: .3em;
+    
 }
 
 #homecon p {
     font-size: 1.9em;
     font-family: Arial, Helvetica, sans-serif;
     color: #7e7e7e;
+    padding-bottom: 50px;
 }
