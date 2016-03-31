@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'uri'
 require 'active_record'
+require 'sinatra/captcha'
 
 db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///blogbase')
 
@@ -50,6 +51,9 @@ get '*/blog' do
   erb :blog
 end
 
+get '*/fail' do
+  erb :fail
+end
 
 get '/comments/:id' do
   #Latest post gets to the top
@@ -60,13 +64,15 @@ end
 
 
 post '*/createcomment' do
-  comment = Comment.new(params[:comment])
-  if comment.save
+  redirect to "/fail" unless captcha_pass?
+  @newcomment = Comment.new(params[:comment])
+  if @newcomment.save
     redirect to "/blog"
   else
-    return "failure!"
+    redirect to "/fail"
   end
 end
+
 
 get '/readmore/:id' do
 @blogreadmore = Blogpost.find_by_id(params[:id])

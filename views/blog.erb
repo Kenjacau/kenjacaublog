@@ -94,11 +94,14 @@
                                         </div>
                                         </div>
                                         </div>
+                                        
+                                        
+
                             <div class="row">
                                 <div class="collapse container" id="collapseCreateComment<%=blogpost.id%>">
                                     <div class="card card-block">
                                         <div class="row">
-                                            <form class="form" method="POST" action="/createcomment">
+                                            <form class="form" method="POST" action="/createcomment" role="form">
                                                 <input type='hidden' name="comment[blogposts_id]" value='<%=blogpost.id%>' />
 
 
@@ -114,13 +117,20 @@
                                                     <div class="form-group">
                                                         <div class="col-md-3">
                                                             <textarea class="form-control n" rows="5" placeholder="Comment" name="comment[comment]"></textarea>
+                                                           
                                                         </div>
+                                                         
                                                     </div>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <button class="btn btn-primary btn-md" type="submit">Submit</button>
+                                                        <br>
+  <div><%= captcha_image_tag %></div>
+  <br>
+  <label>Captcha:</label>
+  <%= captcha_answer_tag %>
+                                                        <button class="btn btn-success" type="submit">Submit</button>
                                                     </div>
                                                 </div>
 
