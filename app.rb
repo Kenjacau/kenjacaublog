@@ -31,10 +31,9 @@ get '/resume' do
   redirect '/static/resume.html' 
 end
 
-get '/blog' do
+get '*/blog' do
   #Latest post gets to the top
   @blogposts = Blogpost.order("id DESC")
-  @comments = Comment.where(blogposts_id: params[:id])
   erb :blog
 end
 
@@ -46,26 +45,34 @@ get '/comments/:id' do
   erb :blog
 end
 
-get '/createcomment' do
-  erb :create
-end
 
-
-post '/createcomment' do
-  customer = Comment.new(params[:comment])
-  if customer.save
-    redirect to "/"
+post '*/createcomment' do
+  comment = Comment.new(params[:comment])
+  if comment.save
+    redirect to "/blog"
   else
     return "failure!"
   end
 end
 
 get '/readmore/:id' do
-@blogreadmore = Blogpost.where(blogposts_id: params[:id])
+@blogreadmore = Blogpost.find_by_id(params[:id])
 
 erb :readmore
 end
 
 def commentcount(blogpostid)
   return Comment.where(blogposts_id: blogpostid).size
+end
+
+def getcomments(blogpostid)
+  Comment.where(blogposts_id: blogpostid)
+end 
+def getlink(blogpost)
+  post = blogpost
+  if post.hreflink.to_s == ''
+    return ""
+  else
+    return "link"
+  end
 end

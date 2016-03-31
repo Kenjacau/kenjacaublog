@@ -33,87 +33,109 @@
             <div class="col-sm-12 jumbotron">
                 <h2 class="text-center">Blog</h2>
                 <div class="row blog">
-                    
-                    
-            <% @blogposts.each do |blogpost| %>
-          
-                    <div class="row">
+
+
+                    <% @blogposts.each do |blogpost| %>
+
                         <div class="row">
-                            <h3> <%=blogpost.title %> </h3>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-3"> <img src="<%=blogpost.filesrc %>" class="img-thumbnail" width="304" height="236"></img>
+                            <div class="row">
+                                <h3> <%=blogpost.title %> </h3>
                             </div>
-                            <div class="col-sm-9">
-                                <p><%=blogpost.content %></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                           <nav class="navbar navbar-inverse">
-                                <div class="container-fluid">
-                                    <ul class="nav navbar-nav">
-                                       <li><a class="btn btn-inverse" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><%=commentcount(blogpost.id)%> Comments</a></li>
-                                       <li class="link"><a href="<%=blogpost.hreflink%>">Link</a></li>
-                                       
-                                    </ul>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="./readmore/<%=blogpost.id%>"><span></span>Read More</a></li>
-                                    </ul>
+
+                            <div class="row">
+                                <div class="col-sm-3"> <img src="<%=blogpost.filesrc %>" class="img-thumbnail" width="304" height="236"></img>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p>
+                                        <%=blogpost.content %>
+                                    </p>
                                 </div>
                             </div>
-                            
-                        
+                            <div class=container>
+                            <div class="row">
+                                <nav class="navbar navbar-inverse">
+                                    <div class="container-fluid">
+                                        <ul class="nav navbar-nav">
+                                            <li>
+                                                <a class="btn btn-inverse" data-toggle="collapse" href="#collapseViewComment<%=blogpost.id%>" aria-expanded="false" aria-controls="collapseViewComment<%=blogpost.id%>">
+                                                    <%=commentcount(blogpost.id)%> Comments</a>
+                                                   
+                                            </li>
+                                            <li>
+                                            <a class="btn btn-inverse" data-toggle="collapse" href="#collapseCreateComment<%=blogpost.id%>" aria-expanded="false" aria-controls="collapseCreateComment<%=blogpost.id%>">
+                                                   Post Comment</a>
+                                                   </li>
+                                            <li class="link"><a href="<%=blogpost.hreflink%>"><%=getlink(blogpost)%></a></li>
+
+                                        </ul>
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li><a href="/readmore/<%=blogpost.id%>"><span></span>Read More</a></li>
+                                        </ul>
+                                    </div>
+                            </div>
+
+
                             </nav>
-<div class="row">
-                                <div class="collapse container" id="collapseExample">
-                                          <div class="card card-block">
-                                            <div class="row">
-          <form class="form" method="POST" action="/">
-            <input type='hidden' name='csrfmiddlewaretoken' value='BoZB8lOs2tgI0DUVG58fCSxdS075n0jz' />
-
-
-          <div class="row">
-            <div class="form-group">
-              <div class="col-md-3">
-                <input autofocus="autofocus" id="id_name" maxlength="30" name="name" placeholder="Name" type="text" />
-              </div>
-            </div>
-          </div>
-          
-           <div class="row">
-            <div class="form-group">
-              <div class="col-md-3">
-                <input id="id_email" name="email" placeholder="E-mail address" type="email" />
-              </div>
-            </div>
-          </div>
-          
-           <div class="row">
-            <div class="form-group">
-              <div class="col-md-3">
-                <textarea class="form-control n" rows="5" placeholder="Message" name="message"></textarea>
-              </div>
-            </div>
-            </div>
-
-            <div class="row">
-            <div class="col-md-3">
-                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
-              </div>
-            </div>
-            
-
-          </form>
-        </div>
-                                          </div>
+                            <div class="row">
+                                <div class="collapse container" id="collapseViewComment<%=blogpost.id%>">
+                                    <div class="card card-block">
+                                        <div class="row well">
+                                         <% blogcomments = getcomments(blogpost.id) %>
+                                        <% blogcomments.each do |comment| %>
+                                        
+                                        
+                                        <div class="row">
+                                                <p style="font-size:.9em"><%=comment.user%> said: <%=comment.comment%></p>
+                                            </div>
+                                             
+                                        
+                                        <% end %>
                                         </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                            <div class="row">
+                                <div class="collapse container" id="collapseCreateComment<%=blogpost.id%>">
+                                    <div class="card card-block">
+                                        <div class="row">
+                                            <form class="form" method="POST" action="/createcomment">
+                                                <input type='hidden' name="comment[blogposts_id]" value='<%=blogpost.id%>' />
+
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3">
+                                                            <input autofocus="autofocus" id="user" maxlength="30" name="comment[user]" placeholder="Name" type="text" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3">
+                                                            <textarea class="form-control n" rows="5" placeholder="Comment" name="comment[comment]"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <button class="btn btn-primary btn-md" type="submit">Submit</button>
+                                                    </div>
+                                                </div>
+
+
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                                                               
-                    </div>
-                     <% end %>
-                    
-                
+                            </div>
+                            </div>
+
+                        </div>
+                        <% end %>
+
+
                 </div>
             </div>
         </div>

@@ -53,11 +53,11 @@
                                     <ul class="nav navbar-nav">
                                         <li class="comments">
                                           
-                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample"aria-expanded="false" aria-controls="collapseExample"><%=commentcount(blogpost.id)%> Comments</a></li>
-                                        <li class="link"><a href="<%=blogpost.hreflink%>">Link</a></li>
+                                            <a class="btn btn-inverse" data-toggle="collapse" href="#collapseExample"aria-expanded="false" aria-controls="collapseExample"><%=commentcount(@blogreadmore.id)%> Comments</a></li>
+                                        <li class="link"><a href="<%=@blogreadmore.hreflink%>">Link</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="./blog.erb"><span></span>Back</a></li>
+                                        <li><a href="blog"><span></span>Back</a></li>
                                     </ul>
                                     
 <div class="collapse" id="collapseExample">
