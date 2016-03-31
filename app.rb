@@ -66,6 +66,9 @@ end
 post '*/createcomment' do
   redirect to "/fail" unless captcha_pass?
   @newcomment = Comment.new(params[:comment])
+  if @newcomment.user == ''
+    @newcomment.user = "anonymous"
+  end
   if @newcomment.save
     redirect to "/blog"
   else
